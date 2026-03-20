@@ -1,0 +1,154 @@
+<!-- index.html — พีรณัฐ ปาลพันธ์ Portfolio -->
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Peeranat Palphan — พีรณัฐ ปาลพันธ์</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Sarabun:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <canvas id="bgCanvas"></canvas>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="tag">✦ Personal Profile ✦</div>
+    <p>Peeranat Palphan &nbsp;·&nbsp; ชื่อเล่น <strong class="hl">พี</strong></p>
+    <div class="header-tags">
+      <span class="htag"><i class="fas fa-graduation-cap"></i> วศ.บ. ไฟฟ้าสื่อสารฯ · KMITL</span>
+      <span class="htag"><i class="fas fa-music"></i> SEASON FIVE Fan</span>
+    </div>
+    <div class="header-socials">
+      <a href="https://www.instagram.com/peelopp07_?igsh=MWJld2NrcnJienF4Mw==" target="_blank" rel="noopener noreferrer" class="soc-btn ig" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.youtube.com/watch?v=jsf5q8PwT9w" target="_blank" rel="noopener noreferrer" class="soc-btn yt" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+    </div>
+  </header>
+
+  <!-- CARDS — Desktop: flex row / Mobile: vertical stack with expand -->
+  <div class="cards" id="cardsWrap">
+
+    <!-- Card 1: Photo -->
+    <div class="card photo-card" data-id="photo" tabindex="0" aria-expanded="false">
+      <div class="card-img-wrap">
+        <img data-img="photo" alt="พีรณัฐ ปาลพันธ์" loading="lazy" style="object-position:center 8%" />
+        <div class="img-overlay"></div>
+      </div>
+      <div class="card-title-pill"><i class="fas fa-camera"></i><span class="pill-txt"> Photo</span></div>
+      <div class="card-content">
+        <button class="close-btn" aria-label="ปิด"><i class="fas fa-xmark"></i></button>
+        <span class="lbl"><i class="fas fa-camera"></i> รูปของพี</span>
+        <div class="ttl">นายพีรณัฐ ปาลพันธ์</div>
+        <div class="sub">Nickname · พี / Pee</div>
+        <div class="dsc">ติดตามพีบน Instagram ได้เลยนะครับ! 🧡</div>
+        <div class="card-actions">
+          <a href="https://www.instagram.com/peelopp07_?igsh=MWJld2NrcnJienF4Mw==" target="_blank" rel="noopener noreferrer" class="cta ig-cta">
+            <i class="fab fa-instagram"></i> Instagram
+          </a>
+          <a href="https://www.facebook.com/share/1DtkMNP7W2/" target="_blank" rel="noopener noreferrer" class="cta fb-cta">
+            <i class="fab fa-facebook"></i> Facebook
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2: Music -->
+    <div class="card music-card" data-id="music" tabindex="0" aria-expanded="false">
+      <div class="card-img-wrap">
+        <img data-img="music" alt="อยากให้รู้ว่ารักเธอ — SEASON FIVE" loading="lazy" />
+        <div class="img-overlay"></div>
+      </div>
+      <div class="card-title-pill"><i class="fas fa-music"></i><span class="pill-txt"> Music</span></div>
+      <div class="card-content">
+        <button class="close-btn" aria-label="ปิด"><i class="fas fa-xmark"></i></button>
+        <span class="lbl"><i class="fas fa-headphones"></i> เพลงโปรดของพี</span>
+        <div class="ttl">อยากให้รู้ว่ารักเธอ</div>
+        <div class="sub">SEASON FIVE</div>
+        <div class="dsc">เพลงโปรดของพี 🎶 กดฟังได้เลยครับ!</div>
+        <div class="card-actions">
+          <a href="https://www.youtube.com/watch?v=jsf5q8PwT9w" target="_blank" rel="noopener noreferrer" class="cta yt-cta">
+            <i class="fab fa-youtube"></i> เปิดฟัง YouTube
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3: KMITL -->
+    <div class="card kmitl-card" data-id="kmitl" tabindex="0" aria-expanded="false">
+      <div class="card-img-wrap">
+        <img data-img="kmitl" alt="KMITL" loading="lazy" style="object-position:center 60%" />
+        <div class="img-overlay"></div>
+      </div>
+      <div class="card-title-pill"><i class="fas fa-university"></i><span class="pill-txt"> KMITL</span></div>
+      <div class="card-content">
+        <button class="close-btn" aria-label="ปิด"><i class="fas fa-xmark"></i></button>
+        <span class="lbl"><i class="fas fa-graduation-cap"></i> มหาวิทยาลัยปัจจุบัน</span>
+        <div class="ttl">King Mongkut's Institute of Technology Ladkrabang</div>
+        <div class="sub">KMITL · สจล.</div>
+        <div class="dsc">คณะวิศวกรรมศาสตร์ · Ladkrabang, Bangkok 🇹🇭</div>
+        <div class="card-actions">
+          <a href="https://www.kmitl.ac.th/" target="_blank" rel="noopener noreferrer" class="cta globe-cta">
+            <i class="fas fa-globe"></i> เยี่ยมชมเว็บไซต์
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4: Curriculum -->
+    <div class="card curr-card" data-id="curriculum" tabindex="0" aria-expanded="false">
+      <div class="card-img-wrap">
+        <img data-img="curriculum" alt="วิศวกรรมไฟฟ้าสื่อสารและเครือข่าย" loading="lazy" />
+        <div class="img-overlay"></div>
+      </div>
+      <div class="card-title-pill"><i class="fas fa-satellite-dish"></i><span class="pill-txt"> Curriculum</span></div>
+      <div class="card-content">
+        <button class="close-btn" aria-label="ปิด"><i class="fas fa-xmark"></i></button>
+        <span class="lbl"><i class="fas fa-satellite-dish"></i> สาขาที่เรียน</span>
+        <div class="ttl">Electrical Communication &amp; Network Eng.</div>
+        <div class="sub">วศ.บ. วิศวกรรมไฟฟ้าสื่อสารและเครือข่าย</div>
+        <div class="dsc">5G · Satellite · IoT · Fiber Optic</div>
+        <div class="card-actions">
+          <a href="https://curriculum.kmitl.ac.th/major/2" target="_blank" rel="noopener noreferrer" class="cta book-cta">
+            <i class="fas fa-book-open"></i> ดูหลักสูตร
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 5: School -->
+    <div class="card school-card" data-id="school" tabindex="0" aria-expanded="false">
+      <div class="card-img-wrap">
+        <img data-img="school" alt="โรงเรียนเตรียมอุดมศึกษาพัฒนาการ ปทุมธานี" loading="lazy" />
+        <div class="img-overlay"></div>
+      </div>
+      <div class="card-title-pill"><i class="fas fa-school"></i><span class="pill-txt"> School</span></div>
+      <div class="card-content">
+        <button class="close-btn" aria-label="ปิด"><i class="fas fa-xmark"></i></button>
+        <span class="lbl"><i class="fas fa-school"></i> โรงเรียนเก่า</span>
+        <div class="ttl">เตรียมอุดมศึกษาพัฒนาการ ปทุมธานี</div>
+        <div class="sub">TUPPT · ต.อ.พ.ปท.</div>
+        <div class="dsc">Triam Udom Suksaphatthana · Pathumthani 🏫</div>
+        <div class="card-actions">
+          <a href="http://wp.tuppt.ac.th/" target="_blank" rel="noopener noreferrer" class="cta school-cta">
+            <i class="fas fa-school"></i> เยี่ยมชมโรงเรียน
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-text"><span>Peeranat Palphan</span> &nbsp;·&nbsp; KMITL · Telecom &amp; Network Engineering &nbsp;·&nbsp; 2026</div>
+    <div class="footer-socials">
+      <a href="https://www.instagram.com/peelopp07_?igsh=MWJld2NrcnJienF4Mw==" target="_blank" rel="noopener noreferrer" class="soc-btn ig" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.youtube.com/watch?v=jsf5q8PwT9w" target="_blank" rel="noopener noreferrer" class="soc-btn yt" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

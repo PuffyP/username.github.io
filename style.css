@@ -1,0 +1,495 @@
+/* style.css — พีรณัฐ ปาลพันธ์ Portfolio */
+
+/* ── VARIABLES ── */
+:root {
+  --orange:   #ff6b1a;
+  --orange-l: #ff9a5c;
+  --orange-d: #c44a00;
+  --cream:    #fff8f2;
+  --dark:     #1a0a00;
+  --gray:     #9e7b6b;
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+  --ease-card:   cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Sarabun", sans-serif;
+  color: var(--dark);
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(255,107,26,.18), transparent 70%),
+    radial-gradient(ellipse 50% 50% at 0% 100%,  rgba(255,107,26,.09), transparent 60%),
+    radial-gradient(ellipse 50% 50% at 100% 0%,  rgba(255,154,92,.09), transparent 60%),
+    repeating-linear-gradient(45deg,  rgba(255,107,26,.02) 0 1px, transparent 0 40px),
+    repeating-linear-gradient(-45deg, rgba(255,107,26,.015) 0 1px, transparent 0 60px),
+    linear-gradient(180deg, #fff5ee 0%, #fff8f2 40%, #ffeedd 100%);
+  padding: 2rem 1rem 4rem;
+  overflow-x: hidden;
+}
+
+/* ── CANVAS ── */
+#bgCanvas {
+  position: fixed;
+  inset: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── HEADER ── */
+.header {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  animation: fadeDown .7s var(--ease-spring) both;
+}
+.tag {
+  display: inline-block;
+  font-family: "Space Mono", monospace;
+  font-size: .7rem;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--orange);
+  border: 1px solid var(--orange-l);
+  border-radius: 999px;
+  padding: .3em 1.2em;
+  margin-bottom: .8rem;
+  background: rgba(255,107,26,.07);
+}
+.header h1 {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 900;
+  color: var(--dark);
+  line-height: 1.15;
+  background: none;
+}
+/* Thai characters use Sarabun, no gray fallback box */
+.header h1 .name-th {
+  font-family: "Sarabun", sans-serif;
+  font-weight: 700;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  color: var(--dark);
+  background: none;
+}
+.header h1 span, .hl { color: var(--orange); }
+.header > p {
+  margin-top: .4rem;
+  font-size: .95rem;
+  color: var(--gray);
+  letter-spacing: .05em;
+}
+
+/* Header tags */
+.header-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .5rem;
+  margin-top: .8rem;
+}
+.htag {
+  background: rgba(255,107,26,.08);
+  border: 1px solid rgba(255,107,26,.25);
+  color: var(--orange-d);
+  font-size: .78rem;
+  font-family: "Space Mono", monospace;
+  padding: .3em .9em;
+  border-radius: 999px;
+  letter-spacing: .04em;
+}
+.htag i { margin-right: .35em; }
+
+/* Social buttons */
+.header-socials {
+  display: flex;
+  justify-content: center;
+  gap: .65rem;
+  margin-top: 1rem;
+}
+.soc-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  font-size: 1.15rem;
+  color: #fff;
+  transition: transform .3s var(--ease-spring), box-shadow .3s ease;
+  text-decoration: none;
+}
+.soc-btn:hover { transform: scale(1.18) translateY(-2px); }
+.soc-btn.ig {
+  background: linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);
+  box-shadow: 0 4px 16px rgba(220,39,67,.4);
+}
+.soc-btn.ig:hover { box-shadow: 0 6px 24px rgba(220,39,67,.6); }
+.soc-btn.yt {
+  background: #ff0000;
+  box-shadow: 0 4px 16px rgba(255,0,0,.35);
+}
+.soc-btn.yt:hover { box-shadow: 0 6px 24px rgba(255,0,0,.55); }
+
+/* ─────────────────────────────────────────
+   CARDS  —  DESKTOP (flex row, hover expand)
+───────────────────────────────────────── */
+.cards {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: nowrap;
+  width: min(1200px, 92vw);
+  height: 440px;
+  overflow: hidden;
+  border-radius: 1.2rem;
+  box-shadow: 0 30px 80px rgba(196,74,0,.22), 0 0 0 1px rgba(255,255,255,.6);
+  animation: fadeUp .8s .2s var(--ease-spring) both;
+}
+
+.card {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background: #111;
+  cursor: pointer;
+  transition: flex .55s var(--ease-card);
+  will-change: flex;
+  outline: none;
+}
+.card:hover,
+.card:focus-visible { flex: 3.5; }
+
+/* Image */
+.card-img-wrap {
+  position: absolute;
+  inset: 0;
+}
+.card-img-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .55s ease, filter .55s ease;
+  filter: grayscale(80%) brightness(.7);
+  will-change: transform, filter;
+}
+.card:hover .card-img-wrap img,
+.card:focus-visible .card-img-wrap img {
+  transform: scale(1.08);
+  filter: grayscale(0%) brightness(.88);
+}
+.photo-card .card-img-wrap img { filter: grayscale(60%) brightness(.75); }
+.photo-card:hover .card-img-wrap img,
+.photo-card:focus-visible .card-img-wrap img { filter: grayscale(0%) brightness(1); }
+
+/* Dark gradient overlay */
+.img-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.88) 0%, rgba(0,0,0,.25) 50%, transparent 75%);
+  z-index: 1;
+  pointer-events: none;
+}
+.photo-card .img-overlay {
+  background: linear-gradient(to top, rgba(180,60,0,.8) 0%, rgba(0,0,0,.1) 55%, transparent 75%);
+}
+
+/* Vertical title pill (shown when closed) */
+.card-title-pill {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-90deg);
+  white-space: nowrap;
+  font-family: "Space Mono", monospace;
+  font-size: .65rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.9);
+  background: rgba(0,0,0,.5);
+  padding: .4em 1em;
+  border-radius: 4px;
+  backdrop-filter: blur(4px);
+  z-index: 3;
+  pointer-events: none;
+  transition: opacity .3s ease, transform .35s ease;
+}
+.card:hover .card-title-pill,
+.card:focus-visible .card-title-pill {
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(-90deg) scale(.5);
+}
+
+/* Card content (slide up on hover) */
+.card-content {
+  position: absolute;
+  z-index: 4;
+  bottom: 0; left: 0; right: 0;
+  padding: 1.3rem 1.2rem 1.4rem;
+  transform: translateY(14px);
+  opacity: 0;
+  transition: transform .4s ease, opacity .35s ease;
+  pointer-events: none;
+}
+.card:hover .card-content,
+.card:focus-visible .card-content {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Close button — hidden on desktop */
+.close-btn { display: none; }
+
+/* Typography inside cards */
+.lbl {
+  display: block;
+  font-family: "Space Mono", monospace;
+  font-size: .58rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--orange-l);
+  margin-bottom: .4rem;
+}
+.lbl i { margin-right: .3em; }
+.ttl {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(.85rem, 1.6vw, 1.3rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.25;
+}
+.sub {
+  font-family: "Space Mono", monospace;
+  font-size: .66rem;
+  color: rgba(255,255,255,.55);
+  margin-top: .2rem;
+  letter-spacing: .06em;
+}
+.dsc {
+  font-family: "Sarabun", sans-serif;
+  font-size: .82rem;
+  color: rgba(255,255,255,.82);
+  margin-top: .45rem;
+  line-height: 1.55;
+}
+.card-actions {
+  margin-top: .65rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .45rem;
+}
+
+/* CTA buttons */
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: .4em;
+  background: linear-gradient(135deg, var(--orange), var(--orange-d));
+  color: #fff !important;
+  font-family: "Space Mono", monospace;
+  font-size: .62rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: .5em 1.2em;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(255,107,26,.45);
+  transition: transform .25s var(--ease-spring), box-shadow .25s ease;
+  pointer-events: auto;
+}
+.cta:hover  { transform: scale(1.07) translateY(-1px); box-shadow: 0 6px 22px rgba(255,107,26,.62); }
+.cta:active { transform: scale(.96); }
+
+.ig-cta    { background: linear-gradient(135deg,#f09433,#dc2743,#bc1888); box-shadow: 0 4px 14px rgba(220,39,67,.4); }
+.ig-cta:hover { box-shadow: 0 6px 22px rgba(220,39,67,.6); }
+.yt-cta    { background: #e00; box-shadow: 0 4px 14px rgba(255,0,0,.35); }
+.yt-cta:hover { box-shadow: 0 6px 22px rgba(255,0,0,.55); }
+.globe-cta { background: linear-gradient(135deg,#1a6e3c,#0e4726); }
+.book-cta  { background: linear-gradient(135deg,#1a5c8a,#0d3659); }
+.school-cta{ background: linear-gradient(135deg,#8a1a5c,#590d38); }
+.fb-cta    { background: linear-gradient(135deg,#1877f2,#0d5fcc); box-shadow: 0 4px 14px rgba(24,119,242,.4); }
+.fb-cta:hover { box-shadow: 0 6px 22px rgba(24,119,242,.6); }
+
+/* ─────────────────────────────────────────
+   CARDS  —  MOBILE  (vertical stacked + tap)
+───────────────────────────────────────── */
+@media (max-width: 640px) {
+  body { padding: 1.5rem .75rem 3rem; }
+
+  .cards {
+    flex-direction: column;
+    height: auto;
+    width: 94vw;
+    overflow: visible;
+    box-shadow: none;
+    background: transparent;
+    gap: .85rem;
+    border-radius: 0;
+  }
+
+  /* GPU layer for each card */
+  .card {
+    flex: none !important;
+    width: 100%;
+    height: auto;
+    min-height: 80px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 28px rgba(196,74,0,.18), 0 0 0 1px rgba(255,255,255,.5);
+    cursor: pointer;
+    /* Use transform instead of flex for mobile animation */
+    transition: box-shadow .25s ease, transform .2s ease;
+    transform: translateZ(0); /* GPU layer */
+    will-change: transform;
+  }
+  .card:active { transform: scale(.982) translateZ(0); }
+
+  /* Image strip */
+  .card-img-wrap {
+    position: relative;
+    height: 200px;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+  .card-img-wrap img {
+    filter: grayscale(0%) brightness(.88) !important;
+    transform: translateZ(0) !important; /* GPU */
+    transition: none !important;
+    will-change: auto;
+  }
+  .img-overlay {
+    background: linear-gradient(to top, rgba(0,0,0,.72) 0%, rgba(0,0,0,.12) 55%, transparent 100%) !important;
+  }
+
+  /* Title pill at bottom of image */
+  .card-title-pill {
+    position: absolute;
+    bottom: .75rem;
+    left: .85rem;
+    top: auto;
+    transform: none !important;
+    opacity: 1 !important;
+    rotate: 0deg;
+    font-size: .65rem;
+    background: rgba(0,0,0,.55);
+    transition: opacity .2s ease;
+  }
+  .card.is-open .card-title-pill { opacity: 0 !important; }
+
+  /* Detail panel — GPU-accelerated height animation */
+  .card-content {
+    position: relative !important;
+    bottom: auto; left: auto; right: auto;
+    transform: translateZ(0) !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    background: #1c0c04;
+    padding: 0 1.1rem;
+    max-height: 0;
+    overflow: hidden;
+    /* height-based transition is smoother on mobile than max-height */
+    transition: max-height .38s cubic-bezier(0.4,0,0.2,1),
+                padding .3s ease;
+    will-change: max-height;
+  }
+  .card.is-open .card-content {
+    max-height: 340px;
+    padding: 1rem 1.1rem 1.2rem;
+  }
+
+  /* Close button */
+  .close-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: .7rem; right: .8rem;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255,255,255,.15);
+    color: rgba(255,255,255,.85);
+    font-size: .85rem;
+    cursor: pointer;
+    z-index: 5;
+    transition: background .2s ease, transform .2s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .close-btn:active { background: rgba(255,107,26,.5); transform: scale(.92); }
+
+  .ttl { font-size: 1rem; color: #fff; }
+  .sub { font-size: .65rem; }
+  .dsc { font-size: .82rem; color: rgba(255,255,255,.82); }
+  .cta { font-size: .65rem; padding: .55em 1.1em; }
+
+  /* Tap hint */
+  .card:not(.is-open)::before {
+    content: "แตะเพื่อดู";
+    position: absolute;
+    bottom: .75rem;
+    right: .85rem;
+    font-family: "Space Mono", monospace;
+    font-size: .55rem;
+    letter-spacing: .08em;
+    color: rgba(255,255,255,.65);
+    background: rgba(0,0,0,.42);
+    padding: .25em .7em;
+    border-radius: 999px;
+    z-index: 3;
+    pointer-events: none;
+    backdrop-filter: blur(4px);
+  }
+
+  /* Remove tap highlight globally on mobile */
+  .card, .cta, .soc-btn, .close-btn {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* ── FOOTER ── */
+footer {
+  position: relative;
+  z-index: 1;
+  margin-top: 2rem;
+  text-align: center;
+  font-family: "Space Mono", monospace;
+  font-size: .65rem;
+  letter-spacing: .1em;
+  color: var(--gray);
+  animation: fadeUp 1s .5s var(--ease-spring) both;
+}
+footer .footer-text span { color: var(--orange); }
+.footer-socials {
+  display: flex;
+  justify-content: center;
+  gap: .6rem;
+  margin-top: .75rem;
+}
+.footer-socials .soc-btn { width: 38px; height: 38px; font-size: 1rem; }
+
+/* ── KEYFRAMES ── */
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── REDUCED MOTION ── */
+@media (prefers-reduced-motion: reduce) {
+  .card, .card-img-wrap img, .card-content, .card-title-pill { transition: none; animation: none; }
+  #bgCanvas { display: none; }
+}
